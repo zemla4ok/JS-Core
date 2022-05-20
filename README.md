@@ -1,4 +1,4 @@
 ## JS Core
 
 #### Лекции
-[CWP/LECTION/01 - Введение](https://accetone.github.io/cwp/01)  
+[JSC/LECTION/01 - Типы данных и переменные. Приведение типов, сравнение](https://zemla4ok.github.io/JS-Core/01)  
