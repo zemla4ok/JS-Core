@@ -1,7 +1,8 @@
-## JS Core
+## JS Core intensive
 
 #### Лекции
 [JSC/LECTION/01 - Git, GitHub. Команды git. Git Flow.](https://zemla4ok.github.io/JS-Core/01)
+[JSC/LECTION/02 - Типы данных и переменные. Приведение типов, сравнение.](https://zemla4ok.github.io/JS-Core/02)
 
 
 #### Задания
