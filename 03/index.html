@@ -18,7 +18,7 @@
     <section class="large">
       <h2>JS Core</h2>
       <p class="author">
-        <small>Лекция 04</small>
+        <small>Лекция 03</small>
       </p>
     </section>
 
@@ -28,22 +28,235 @@
     </section>
 
     <section>
-      <h3>Функция</h3>
-      <img src="images/function-declaring.png">
-    </section>
-
-    <section>
-      <h3>Именование функций</h3>
+      <h3>Типы данных</h3>
       <ul>
-        <li class="left fragment">camelCase</li>
-        <li class="left fragment">содержит глагол</li>
-        <li class="left fragment">"говорящее" имя</li>
+        <li class="left fragment green">примитивы</li>
+        <li class="left fragment magenta">ссылочные</li>
       </ul>
     </section>
 
+    <section>
+      <h3 class="green">"по значению"</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+// создаем переменную num, задаем ей значение 78
+let num = 78;
+// создаем переменную newNum, задаем ей значение num, т.е. 78
+let newNum = num;
 
+num = 100;
 
+console.log(num);    // 100
+console.log(newNum); // 78
+          </code>
+        </pre>
+      </div>
+    </section>
 
+    <section>
+      <h3 class="magenta">"по ссылке"</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+// создаем переменную obj, складываем в нее ссылку на пустой объект
+const obj = {};
+// создаем переменную newObj, задаем ей значение переменной obj, т.е. ссылку на объект obj
+const newObj = obj;
+
+newObj.message = 'Hello!!';
+
+console.log(obj);     // { message: 'Hello!!' }
+console.log(newObj);  // { message: 'Hello!!' }
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Создание объектов</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+// Литеральная форма
+const emptyObject = {};
+const user = {
+  id: 1,
+  firstName: 'Dmitry',
+  lastName: 'Kotovich',
+  createdAt: new Date(),
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Создание объектов</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+// Ключевое слово new
+// Встроенные функции конструкторы(не используется)
+const emptyObject = new Object();
+const oneHundredAsObject = new Number(100);
+const emptyStringAsObject = new String('');
+const falseAsObject = new Boolean(false);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Создание объектов</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+// Ключевое слово new
+// Пользовательские функции конструкторы
+const coolObject = new MyCoolObject();
+const dmitry = new Person('Dmitry', 'Kotovich');
+
+function MyCoolObject() {
+  this.isCool = true;
+}
+class Person {
+  constructor(firstName, lastName) {
+    this.firstname = firstName;
+    this.lastName = lastName;
+  }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Создание объектов</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+// Встроенные методы
+// Object.create(proto, ?props)
+const pureObject = Object.create(null);
+const simpleObject = Object.create({});
+const objectWithName = Object.create({}, {
+  name: {
+    enumerable: true,
+    value: 'Dmitry'
+  }
+});
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Создание объектов</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+// Встроенные методы
+// Object.assign(targetObject, ...sourceObjects)
+const someObject = { foo: 'bar' };
+const someObjCopy = Object.assign({}, someObject);
+const dmitry = Object.assign(
+  {},
+  { firstname: 'Dmitry' },
+  { lastName: 'Kotovich' }
+);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Встроенные методы Object</h3>
+      <ul>
+        <li class="left fragment">Object.keys(object)</li>
+        <li class="left fragment">Object.values(object)</li>
+        <li class="left fragment">Object.entries(object)</li>
+        <li class="left fragment">Object.is(object1, object2)</li>
+        <li class="left fragment">
+          <a href="https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object#methods" target="_blank">
+            клац
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Object.keys(object)</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const object = {
+  field: 123,
+  foo: 'bar',
+}
+
+const keys = Object.keys(object);
+console.log(keys); // ['field', 'foo'];
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3  class="yellow">Object.values(object)</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const object = {
+  field: 123,
+  foo: 'bar',
+}
+
+const keys = Object.values(object);
+console.log(keys); // [123, 'bar'];
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3  class="yellow">Object.entries(object)</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const object = {
+  field: 123,
+  foo: 'bar',
+}
+
+const keys = Object.entries(object);
+console.log(keys);
+// [['field', 123], ['foo', 'bar']];
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Object.is(object1, object2)</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+Object.is(25, 25);                // true
+Object.is('foo', 'foo');          // true
+Object.is('foo', 'bar');          // false
+Object.is(null, null);            // true
+Object.is(undefined, undefined);  // true
+Object.is(window, window);        // true
+Object.is([], []);                // false
+const foo = { a: 1 };
+const bar = { a: 1 };
+Object.is(foo, foo);              // true
+Object.is(foo, bar);              // false
+          </code>
+        </pre>
+      </div>
+    </section>
 
 
 
