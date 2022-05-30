@@ -498,9 +498,126 @@ console.log(variableInCondition); // Error
       </table>
     </section>
 
+    <section>
+      <h3>Имена переменных</h3>
+      <div class="left">
+      <pre class="javascript">
+          <code>
+// Может начинаться с:
+const variable = 1;  // буквы
+const _variable = 2; // нижнего подчеркивания(underscore)
+const $variable = 3; // знака доллара($)
 
+let myVariable = 4;   // camelCase для переменных
+const MY_CONSTANT = 5 // CONSTANT_CASE для констант
 
+// PascalCase для функций-конструкторов и классов
+function User(name) {
+  this.name = name;
+}
+class Animal {}
+          </code>
+        </pre>
+      </div>
+    </section>
 
+    <section>
+      <h3>Приведение типов</h3>
+      <ul>
+        <li class="left fragment">приведение числа к строке</li>
+        <li class="left fragment">приведение строки к числу</li>
+        <li class="left fragment">приведение значения к логическому типу</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Приведение числа к строке</h3>
+      <div class="left">
+      <pre class="javascript">
+          <code>
+// Явное приведение
+console.log(String(123.45));  // '123.45'
+console.log(12..toString());        // '12'
+console.log(12..toString(2)); // '1100'
+console.log((-67.89).toString());   // '-67.89'
+
+// Неявное приведение
+console.log(1234 + ''); // 1234
+console.log(-1234 + 1); // -1234
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3>Приведение строки к числу</h3>
+      <div class="left">
+      <pre class="javascript">
+          <code>
+// Явное
+console.log(Number('100'));  // 100
+console.log(Number('12ab'));  // NaN
+console.log(parseInt('123.123')); // 123
+console.log(parseInt('55', 7)); // 40
+console.log(parseFloat('67.89')); // 67.89
+console.log(parseFloat('67.89asd')); // 67.89
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3>Приведение строки к числу</h3>
+      <div class="left">
+      <pre class="javascript">
+          <code>
+// Неявное
+console.log(+'12'); // 12
+console.log(+'-12.34'); // -12.34
+console.log(2 > '3'); // false
+console.log(13 <= '123.4'); // true
+console.log(5 - '4'); // 1
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3>Приведение к логическому типу</h3>
+      <div class="left">
+      <pre class="javascript">
+          <code>
+// Явное
+console.log(Boolean(153.22)); // true
+console.log(Boolean(null)); // false
+console.log(Boolean([])); // true
+console.log(Boolean('Some text...')); // true
+console.log(Boolean('')); // false
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3>Приведение к логическому типу</h3>
+      <div class="left">
+      <pre class="javascript">
+          <code>
+// Неявное
+console.log(!!0);  // false
+console.log(!!{}); // true
+if ('Some text...') {
+  console.log('string is not empty'); // 'string is not empty'
+}
+if (undefined) {
+  console.log('Never...'); // не будет залогировано
+}
+console.log(2 || null);  // 2
+console.log(0 && 'foo'); // 0
+          </code>
+        </pre>
+      </div>
+    </section>
 
     <section>
       <h3>Q&A</h3>
