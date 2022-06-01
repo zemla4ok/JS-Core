@@ -10,6 +10,12 @@
   <link rel="stylesheet" href="../lib/css/zenburn.css">
   <link rel="stylesheet" href="../css/user.css">
   <link rel="icon" href="../icons/favicon.png">
+
+  <style>
+    .big-o-img {
+        width: 600px;
+    }
+  </style>
 </head>
 <body class="yandex nodejs">
 <div class="reveal">
@@ -23,32 +29,84 @@
     </section>
 
     <section>
-      <h3>Функции.</h3>
+      <h3>Big O.</h3>
     </section>
 
     <section>
-      <h3>Функция</h3>
-      <img src="images/function-declaring.png">
+      <h3>Big O </h3>
+      <img class="big-o-img" src="images/big-o.png">
     </section>
 
     <section>
-      <h3>Именование функций</h3>
+      <h3 class="yellow">O(1)</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const nums = [1,2,3,4,5];
+
+const firstNumber = nums[0];
+const anotherOneNumber = nums[5];
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">O(n)</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const nums = [1,2,3,4,5];
+let sum = 0;
+
+for(let num of nums){
+  sum += num;
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">O(n^2)</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const hasDuplicates = function (num) {
+  for (let i = 0; i < nums.length; i++) {
+    const thisNum = nums[i];
+    for (let j = 0; j < nums.length; j++) {
+      if (j !== i) {
+        const otherNum = nums[j];
+        if (otherNum === thisNum) return true;
+      }
+    }
+  }
+  return false;
+}
+
+const nums = [1, 2, 3, 4, 5, 5];
+hasDuplicates(nums); //true
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">O(log n)</h3>
+      <img class="big-o-img" src="images/binary-search.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Итог</h3>
       <ul>
-        <li class="left fragment">camelCase</li>
-        <li class="left fragment">содержит глагол</li>
-        <li class="left fragment">"говорящее" имя</li>
+        <li class="left fragment"><b>O(1)</b> - получение по индексу</li>
+        <li class="left fragment"><b>O(n)</b> - перебор коллекции</li>
+        <li class="left fragment"><b>O(n^2)</b> - перебор в переборе</li>
+        <li class="left fragment"><b>O(log n)</b> - разделяй и властвуй <span class="magenta">:)</span></li>
+        <li class="left fragment"><b>*O(n log n)</b> = O(n) + O(log n)</li>
       </ul>
     </section>
-
-
-
-
-
-
-
-
-
-
 
     <section>
       <h3>Q&A</h3>
