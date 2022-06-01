@@ -258,11 +258,301 @@ Object.is(foo, bar);              // false
       </div>
     </section>
 
+    <section>
+      <h3 class="yellow">Копирование объектов</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const person = {
+  firstName: 'Dmitry',
+  lastName: 'Kotovich'
+};
+const personCopy = Object.assign({}, person);
 
+personCopy.firstName = 'Roman';
 
+console.log(personCopy); // { firstName: 'Roman', lastName: 'Kotovich' }
+console.log(person);     // { firstName: 'Dmitry', lastName: 'Kotovich' }
+          </code>
+        </pre>
+      </div>
+    </section>
 
+    <section>
+      <h3 class="yellow">Копирование объектов</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const personWithPassport = {
+  firstName: 'Dmitry',
+  lastName: 'Kotovich',
+  passport: {
+    series: 'KH',
+    number: '1231234'
+  }
+};
+const personWithPassportCopy = Object.assign({}, personWithPassport);
 
+personWithPassportCopy.passport.series = 'MC';
+console.log(personWithPassportCopy); // { ..., passport: { series: 'MC', number: '1231234' } }
+console.log(personWithPassport);     // { ..., passport: { series: 'MC', number: '1231234' } }
+          </code>
+        </pre>
+      </div>
+    </section>
 
+    <section>
+      <h3 class="yellow">Правильное копирование объектов</h3>
+      <ul>
+        <li class="left fragment green">lodash</li>
+        <li class="left fragment green">JSON.stringify & JSON.parse</li>
+        <li class="left fragment green">своя функция глубокого копирования</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Сравнение объектов</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const obj = { foo: 'bar' };
+const obj2 = { foo: 'bar' };
+
+console.log(obj == obj2); // true
+console.log(obj === obj2); // false
+console.log(Object.is(obj, obj2)); // false
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Правильное сравнение объектов</h3>
+      <ul>
+        <li class="left fragment green">Ручное сравнение</li>
+        <li class="left fragment green">Ручное сравнение на уровне класса</li>
+        <li class="left fragment green">Поверхностное сравнение</li>
+        <li class="left fragment green">Глубокое сравнение</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Массивы</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const empty = [];
+const numbers = [ 1, 2, 3, 12, 99 ];
+
+const oneMoreEmpty = new Array();
+const withOneHundredItems = new Array(100);
+const fruits = new Array('banana', 'apple', 'orange');
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Итерируемые сущности</h3>
+      <ul>
+        <li class="left fragment">строки</li>
+        <li class="left fragment">массивы</li>
+        <li class="left fragment">Map, Set</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Своя итерируемая сущность</h3>
+      <ul>
+        <li class="left fragment">функция по ключу <span class="green">[Symbol.iterator]</span></li>
+        <li class="left fragment">
+          <span class="green">[Symbol.iterator]</span>
+          возвращает объект с методом
+          <span class="red">next()</span>
+        </li>
+        <li class="left fragment">
+          <span class="red">next()</span>
+          возвращает объект с полем
+          <span class="magenta">value</span>
+        </li>
+        <li class="left fragment">
+          <span class="red">next()</span>
+          возвращает объект с полем
+          <span class="magenta">done</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Методы массива</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+    const array = [ 2, 5, 8];
+
+    array.push(1);
+    console.log(array); // [ 2, 5, 8, 1 ]
+    array.pop();
+    console.log(array); // [ 2, 5, 8 ]
+
+    array.unshift(9);
+    console.log(array); // [ 9, 2, 5, 8 ]
+    array.shift();
+    console.log(array); // [ 2, 5, 8 ]
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Перебирающие методы</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+[].forEach((element, index, array) => { /* ... */ })
+
+["Bilbo", "Gandalf", "Nazgul"]
+.forEach((item, index, array) => {
+  console.log(`${index}: ${item}`);
+});
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Перебирающие методы</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+[].filter((element, index, array) => { /* ... */ } );
+
+const words = ['spray', 'limit', 'destruction', 'present'];
+
+const res = words.filter(word => word.length > 6);
+
+console.log(res);
+// ["destruction", "present"]
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Перебирающие методы</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+[].map((element, index, array) => { /* ... */ });
+
+const array1 = [1, 4, 9, 16];
+
+const map1 = array1.map(x => x * 2);
+
+console.log(map1); // [2, 8, 18, 32]
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Перебирающие методы</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+[].find((element, index, array) => { /* ... */ } );
+
+const array2 = [5, 12, 8, 130, 44];
+
+const found = array2.find(element => element > 10);
+
+console.log(found); // 12
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Перебирающие методы</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+[].reduce((prevValue, currValue, currIndex, array) => { /* ... */ } );
+
+const array3 = [1, 2, 3, 4];
+
+const initialValue = 0;
+const sumWithInitial = array3.reduce(
+  (prev, curr) => prev + curr,
+  initialValue
+);
+
+console.log(sumWithInitial); // 10
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Перебирающие методы</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+[].every((element, index, array) => { /* ... */ } );
+[].some((element, index, array) => { /* ... */ } );
+
+const isBelowThreshold = (currentValue) => currentValue < 40;
+
+const array4 = [1, 30, 39, 29, 10, 13];
+
+console.log(array1.every(isBelowThreshold)); // true
+console.log(array1.some(isBelowThreshold)); // true
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Объект в примитив</h3>
+      <ul>
+        <li class="left fragment green">к boolean</li>
+        <li class="left fragment red">к number</li>
+        <li class="left fragment magenta">к string</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Хинты приведения [Symbol.toPrimitive]</h3>
+      <ul>
+        <li class="left fragment green">string</li>
+        <li class="left fragment magenta">number</li>
+        <li class="left fragment red">default</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Логика приведения</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+if ([Symbol.toPrimitive])
+  return[Symbol.toPrimitive](hint);
+
+if (hint == 'string')
+  return .toString()
+else
+  return .valueOf();
+
+if (hint == 'number' || hint == 'default')
+  return .valueOf()
+else
+  return .toString();
+
+throw new Error('error');
+          </code>
+        </pre>
+      </div>
+    </section>
 
     <section>
       <h3>Q&A</h3>
