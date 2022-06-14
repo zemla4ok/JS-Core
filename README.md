@@ -6,7 +6,7 @@
 [JSC/LECTION/03 - Оъекты.](https://zemla4ok.github.io/JS-Core/03)  
 [JSC/LECTION/04 - Сложность алгоритмов (Big O notation).](https://zemla4ok.github.io/JS-Core/04)  
 [JSC/LECTION/05 - Функции.](https://zemla4ok.github.io/JS-Core/05)  
-[JSC/LECTION/06 - ](https://zemla4ok.github.io/JS-Core/06)  
+[JSC/LECTION/06 - Контекст выполнения. Контекст вызова.](https://zemla4ok.github.io/JS-Core/06)  
 
 
 
