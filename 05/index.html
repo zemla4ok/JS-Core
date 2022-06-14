@@ -23,6 +23,318 @@
     </section>
 
     <section>
+      <h3>Функции.</h3>
+    </section>
+
+    <section>
+      <h3>Зачем функции?</h3>
+    </section>
+
+    <section>
+      <h3>Объявление функции</h3>
+      <img class="big-o-img" src="images/function.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Аргументы функции</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function sayHi() {
+  alert("Hi!");
+}
+
+function User(name = "John", surname = "Doe") {
+  this.name = name;
+  this.surname = surname;
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">“Безграничный” JavaScript</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function directAccess(argA, argB, argC) {
+  console.log(argA, argB, argC);
+}
+
+function withArguments() {
+  for (const arg of arguments) {
+    console.log(arg);
+  }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">“Безграничный” JavaScript</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function withRest(...args) {
+  for (const arg of args) {
+    console.log(arg);
+  }
+}
+
+function withPartialRest(argA, argB, ...args) {
+  console.log(argA, argB);
+  for (const arg of args) {
+    console.log(arg);
+  }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Возвращаемое значение</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function calcSquare(number) {
+  return number ^ 2;
+}
+
+function getPermissions(user) {
+  if (user.isAdmin) {
+    return [
+      PERMISSIONS.CREATE,
+      PERMISSIONS.DELETE
+    ]
+  }
+  return [];
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Что может вернуть?</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function getFunction() {
+  return () => console.log('Hi!');
+}
+
+function throwError() {
+  throw new Error('My Error');
+}
+
+function handleError() {
+  try {
+    throwError();
+  } catch(e) {
+    console.error(e);
+  }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Виды функций</h3>
+      <ul>
+        <li class="left fragment">function declaration</li>
+        <li class="left fragment">function expression</li>
+        <li class="left fragment">arrow functions</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">"Состояния" функций</h3>
+      <ul>
+        <li class="left fragment">callback функции</li>
+        <li class="left fragment">функция-конструктор</li>
+        <li class="left fragment">функция высшего порядка</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">function declaration</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+console.log(calcRectArea(5, 6));
+// expected output: 30
+
+function calcRectArea(width, height) {
+  return width * height;
+}
+
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">function expression</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const getRectArea = function(width, height) {
+  return width * height;
+};
+
+console.log(getRectArea(3, 4));
+// expected output: 12
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">arrow functions</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const materials = [
+  'Hydrogen',
+  'Helium',
+  'Lithium',
+  'Beryllium'
+];
+
+console.log(materials.map(material => material.length));
+// expected output: Array [8, 6, 7, 9]
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">callback functions</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function greeting(name) {
+  alert('Hello ' + name);
+}
+
+function processUserInput(callback) {
+  const name = prompt('Please enter your name.');
+  callback(name);
+}
+
+processUserInput(greeting);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">функции-конструкторы</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function User(name) {
+  // this = {};  (неявно)
+
+  // добавляет свойства к this
+  this.name = name;
+  this.isAdmin = false;
+
+  // return this;  (неявно)
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">функция высшего порядка</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function myBind(func, context) {
+  return function() {
+    return func.apply(context);
+  }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Локальные переменные</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+console.log(innerVar); // Error!
+function anyFunc() {
+  var innerVar = 'Hi!';
+}
+console.log(innerVar); // Error!
+
+const numbers = [1, 2, 3];
+for (let index = 0; index < numbers.length; index++) {
+  console.log(index);
+}
+console.log(index); // Error!
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Глобальные переменные</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const MAX_TEMP = 30;
+const MIN_TEMP = -25;
+
+function calcDiffWithMax(temp) {
+  return Math.abs(temp - MAX_TEMP);
+}
+
+function calcDiffWithMin(temp) {
+  return Math.abs(temp - MIN_TEMP);
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">lexical environment</h3>
+      <img class="big-o-img" src="images/lexical-env.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Замыкания</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function makeCounter() {
+  let count = 0;
+
+  return function() {
+    return count++;
+  };
+}
+
+let counter = makeCounter();
+alert( counter() ); // 0
+alert( counter() ); // 1
+alert( counter() ); // 2
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
       <h3>Q&A</h3>
     </section>
   </div>
