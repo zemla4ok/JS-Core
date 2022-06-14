@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <title>05</title>
+  <title>06</title>
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="../css/reveal.css">
@@ -10,6 +10,16 @@
   <link rel="stylesheet" href="../lib/css/zenburn.css">
   <link rel="stylesheet" href="../css/user.css">
   <link rel="icon" href="../icons/favicon.png">
+
+  <style>
+      .exec-context-img {
+          width: 600px;
+      }
+
+      .callstack-img {
+          width: 350px;
+      }
+  </style>
 </head>
 <body class="yandex nodejs">
 <div class="reveal">
@@ -27,14 +37,186 @@
       <h3>Контекст вызова.</h3>
     </section>
 
+    <section>
+      <h3 class="yellow">контекст выполнения</h3>
+      <img class="exec-context-img" src="images/execution-context.png">
+    </section>
 
+    <section>
+      <h3 class="yellow">Типы контекстов</h3>
+      <ul>
+        <li class="left fragment">Глобальный</li>
+        <li class="left fragment">Функциональный</li>
+        <li class="left fragment"><s>eval</s></li>
+      </ul>
+    </section>
 
+    <section>
+      <h3 class="yellow">Глобальный контекст</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+var oneHundred = 100;
+function sayHi() {
+  console.log('Hi!');
+}
 
+console.log(window.oneHundred); // 100
+console.log(window.sayHi()); // f sayHi
+          </code>
+        </pre>
+      </div>
+    </section>
 
+    <section>
+      <h3 class="yellow">Функциональный контекст</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function outerFunction() {
+  const innerCalculation = 10 + 25;
+  console.log(innerCalculation); // 35
 
+  return innerFunction;
+  function innerFunction() {
+    return calcSquare(10);
+  }
+}
 
+console.log(outerFunction());
+function calcSquare(x) { return x ^ 2 }
+          </code>
+        </pre>
+      </div>
+    </section>
 
+    <section>
+      <h3 class="yellow">call stack</h3>
+      <img class="callstack-img" src="images/call-stack.png">
+    </section>
 
+    <section>
+      <h3 class="yellow">ЖЦ контекста выполнения</h3>
+      <ul>
+        <li class="left fragment">Создание</li>
+        <li class="left fragment">Запуск</li>
+        <li class="left fragment">Уничтожение</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Контекст вызова</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function logThis() {
+  console.log(this);
+}
+logThis(); // global this
+
+const obj = {
+  value: 123,
+  logThis
+}
+obj.logThis(); // obj
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Потеря контекста</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+let user = {
+  name: "Dima",
+  hi(x, y) { console.log(this.name, x, y); }
+};
+
+const hi = user.hi;
+
+user.hi(1, 2);  // 'Dima' 1 2
+hi(1, 2);       // undefined 1 2
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Метод call</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+let user = {
+  name: "Dima",
+  hi(x, y) { console.log(this.name, x, y); }
+};
+
+const hi = user.hi;
+
+user.hi(1, 2);  // 'Dima' 1 2
+hi.call(user, 1, 2);  // 'Dima' 1 2
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Метод apply</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+let user = {
+  name: "Dima",
+  hi(x, y) { console.log(this.name, x, y); }
+};
+
+const hi = user.hi;
+
+user.hi(1, 2);     // 'Dima' 1 2
+hi.apply(user, [1, 2]);  // 'Dima' 1 2
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Метод bind</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+let user = {
+  name: "Dima",
+  hi(x, y) { console.log(this.name, x, y); }
+};
+
+const hi = user.hi.bind(user);
+
+user.hi(1, 2);     // 'Dima' 1 2
+hi(1, 2);  // 'Dima' 1 2
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Контекст в стрелочных функциях</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const logThis = () => console.log(this);
+logThis(); // global this
+
+const obj = {
+  value: 123,
+  logThis
+}
+obj.logThis(); // global this
+          </code>
+        </pre>
+      </div>
+    </section>
 
     <section>
       <h3>Q&A</h3>
