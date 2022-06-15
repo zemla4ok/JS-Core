@@ -8,6 +8,7 @@
 [JSC/LECTION/05 - Функции.](https://zemla4ok.github.io/JS-Core/05)  
 [JSC/LECTION/06 - Структуры данных.](https://zemla4ok.github.io/JS-Core/06)  
 [JSC/LECTION/07 - Контекст выполнения. Контекст вызова.](https://zemla4ok.github.io/JS-Core/07)  
+[JSC/LECTION/08 - Event Loop. Асинхронность в JavaScript. Promise, HTTP.](https://zemla4ok.github.io/JS-Core/08)  
 
 
 

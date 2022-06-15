@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>08</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../css/reveal.css">
+  <link rel="stylesheet" href="../css/theme/yandex.css" id="theme">
+  <link rel="stylesheet" href="../lib/css/zenburn.css">
+  <link rel="stylesheet" href="../css/user.css">
+  <link rel="icon" href="../icons/favicon.png">
+
+  <style>
+  </style>
+</head>
+<body class="yandex nodejs">
+<div class="reveal">
+  <div class="slides">
+
+    <section class="large">
+      <h2>JS Core</h2>
+      <p class="author">
+        <small>Лекция 08</small>
+      </p>
+    </section>
+
+    <section>
+      <h3>Event Loop.</h3>
+      <h3>Асинхронность в JavaScript.</h3>
+      <h3>Promise, HTTP.</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">Как работает JS?</h3>
+    </section>
+
+    <section>
+      <img class="exec-context-img" src="images/parallalism.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Синхронный код</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+console.log('job started');
+
+let r = xyz();
+
+console.log('result: ' + r);
+
+console.log('job done');
+
+function xyz() {
+  return 42;
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Асинхронность в JavaScript</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">Асинхронный код</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+console.log('job started');
+
+xyz((r) => {
+  console.log('result: ' + r);
+
+  console.log('job done');
+});
+
+console.log('job in progress');
+
+function xyz(cb) {
+  setTimeout(() => { cb(42); }, 10);
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Как это тогда работает?</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow"><a href="http://latentflip.com/loupe" target="_blank">Event Loop</a></h3>
+      <img class="exec-context-img" src="images/event-loop.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Callback</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+let forEach = function (items, algo) {
+  for (let i = 0; i < items.length; i++) {algo(items[i])}
+};
+let print =  (item) => console.log(item)
+let send = (item) => item.sendEmail();
+
+let clients = [
+  { email: 'jonhdoe@gmail.com',
+    sendEmail: () => {} },
+  { email: 'mrsmith@gmail.com',
+    sendEmail: () => {} }
+];
+
+forEach(clients, print);
+forEach(clients, send);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Callback hell?</h3>
+      <img class="exec-context-img" src="images/callback-hell.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">
+        <a href="http://callbackhell.com/" target="_blank">Callback hell</a>
+      </h3>
+      <img class="exec-context-img" src="images/callback-hell-1.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Promise</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+function zipDir(dir) {
+  return new Promise((resolve, reject) => {
+    // архивируем директорию
+    resolve(files);
+  });
+};
+
+zipDir('/tmp/images')
+.then((files) => {
+  // обрабатываем файлы
+});
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3>Promises - состояние</h3>
+
+      <ul>
+        <li class="left fragment magenta">pending / ожидание</li>
+        <li class="left fragment green">fullfiled / выполнено</li>
+        <li class="left fragment red">rejected / отклонено</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Promise</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+readDir('/tmp/images')
+.then((files) => { return zip(files) })
+.catch((err) => { ... })
+.finally(() => { ... });
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Promise.all</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values);
+});
+// expected output: Array [3, 42, "foo"]
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Promise.allSetled</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const promise1 = Promise.resolve(3);
+const promise2 = new Promise((resolve, reject) => setTimeout(reject, 100, 'foo'));
+const promises = [promise1, promise2];
+
+Promise.allSettled(promises).
+  then((results) => results.forEach((result) => console.log(result.status)));
+
+// expected output:
+// "fulfilled"
+// "rejected"
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Promise.race</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 500, 'one');
+});
+
+const promise2 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'two');
+});
+
+Promise.race([promise1, promise2]).then((value) => {
+  console.log(value);
+  // Both resolve, but promise2 is faster
+});
+// expected output: "two"
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h4><a href="http://bluebirdjs.com/" target="_blank">Bluebird</a></h4>
+
+      <pre class="javascript fragment"><code>
+http://bluebirdjs.com/
+    </code></pre>
+
+      <pre class="javascript fragment"><code>
+npm install bluebird
+    </code></pre>
+
+      <pre class="javascript fragment"><code>
+const Promise = require('bluebird');
+    </code></pre>
+
+      <pre class="javascript fragment"><code>
+import * as Promise from 'bluebird';
+    </code></pre>
+    </section>
+
+    <section>
+      <h3 class="yellow">Задачи</h3>
+      <ul>
+        <li class="left fragment">м<span class="red">И</span>крозадачи</li>
+        <li class="left fragment">м<span class="red">А</span>крозадачи</li>
+      </ul>
+    </section>
+
+    <section>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+console.log('one');
+
+setTimeout(function() {
+  console.log('two');
+}, 0);
+
+Promise.resolve().then(function() {
+  console.log('three');
+})
+
+console.log('four');
+
+// one  four  three  two
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">HTTP</h3>
+      <img class="exec-context-img" src="images/http.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">HTTP/HTTPS</h3>
+      <img class="exec-context-img" src="images/http-layers.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank">
+          HTTP-методы
+        </a>
+      </h3>
+      <ul>
+        <li class="left fragment">GET</li>
+        <li class="left fragment">POST</li>
+        <li class="left fragment">PUT</li>
+        <li class="left fragment">DELETE</li>
+        <li class="left fragment">etc.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Свойства HTTP-методов</h3>
+      <ul>
+        <li class="left fragment">безопасность</li>
+        <li class="left fragment">идемпотентность</li>
+        <li class="left fragment">кэшируемость</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">HTTP-headers</h3>
+      <ul>
+        <li class="left fragment"><a href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest" target="_blank">XMLHttpRequest</a></li>
+        <li class="left fragment"><a href="https://javascript.info/fetch" target="_blank">fetch</a></li>
+        <li class="left fragment"><a href="https://axios-http.com/" target="_blank">axios</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">XMLHttpRequest</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("demo").innerHTML = xhttp.responseText;
+  }
+};
+xhttp.open("GET", "filename", true);
+xhttp.send();
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">fetch</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+let user = {
+  name: 'John',
+  surname: 'Smith'
+};
+let response = await fetch('/article/fetch/post/user', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8'
+  },
+  body: JSON.stringify(user)
+});
+let result = await response.json();
+console.log(result.message);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">axios</h3>
+      <div class="left">
+        <pre class="javascript">
+          <code>
+const axios = require('axios');
+
+axios.get('/user?ID=12345')
+.then((response) => {
+  console.log(response);
+})
+.catch((error) => {
+  console.log(error);
+});
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3>Q&A</h3>
+    </section>
+  </div>
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+<script>
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        slideNumber: true,
+        history: true,
+        center: true,
+        hideAddressBar: true,
+        transition: 'slide',
+        dependencies: [
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                condition: function () {
+                    return Boolean(document.querySelector('pre code'));
+                },
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+
+    const body = document.getElementsByClassName('yandex')[0];
+    let invert = false;
+
+    body.onkeypress = function (event) {
+        if (event.key.toLowerCase() !== 'i') return;
+
+        if (invert) body.style = '';
+        else body.style = 'filter: invert(100%)';
+
+        invert = !invert;
+    }
+</script>
+</body>
+</html>
