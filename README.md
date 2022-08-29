@@ -15,4 +15,5 @@
 #### Задания
 [JSC/TASK/1.1 - Git, GitHub. Команды git. Git Flow.](https://zemla4ok.github.io/JS-Core/tasks/01.html)  
 [JSC/TASK/1.2 - Типы данных и переменные. Приведение типов, сравнение.](https://zemla4ok.github.io/JS-Core/tasks/02.html)  
-[JSC/TASK/2 - Оъекты. Сложность алгоритмов (Big O notation). Функции. Структуры данных.](https://zemla4ok.github.io/JS-Core/tasks/03.html)
+[JSC/TASK/2 - Оъекты. Сложность алгоритмов (Big O notation). Функции. Структуры данных.](https://zemla4ok.github.io/JS-Core/tasks/03.html)  
+[JSC/TASK/3 - Контекст выполнения. Контекст вызова.](https://zemla4ok.github.io/JS-Core/tasks/04.html)
