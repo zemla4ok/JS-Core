@@ -9,6 +9,7 @@
 [JSC/LECTION/2.4 - Структуры данных.](https://zemla4ok.github.io/JS-Core/06)  
 [JSC/LECTION/3 - Контекст выполнения. Контекст вызова.](https://zemla4ok.github.io/JS-Core/07)  
 [JSC/LECTION/4 - Event Loop. Асинхронность в JavaScript. Promise, HTTP.](https://zemla4ok.github.io/JS-Core/08)  
+[JSC/LECTION/5 - ООП, SOLID. ООП в JavaScript, прототипы. Классы ES6.](https://zemla4ok.github.io/JS-Core/09)  
 
 
 
@@ -17,4 +18,5 @@
 [JSC/TASK/1.2 - Типы данных и переменные. Приведение типов, сравнение.](https://zemla4ok.github.io/JS-Core/tasks/02.html)  
 [JSC/TASK/2 - Оъекты. Сложность алгоритмов (Big O notation). Функции. Структуры данных.](https://zemla4ok.github.io/JS-Core/tasks/03.html)  
 [JSC/TASK/3 - Контекст выполнения. Контекст вызова.](https://zemla4ok.github.io/JS-Core/tasks/04.html)  
-[JSC/TASK/3 - Event Loop. Асинхронность в JavaScript. Promise, HTTP.](https://zemla4ok.github.io/JS-Core/tasks/05.html)
+[JSC/TASK/4 - Event Loop. Асинхронность в JavaScript. Promise, HTTP.](https://zemla4ok.github.io/JS-Core/tasks/05.html)  
+[JSC/TASK/5 - ООП, SOLID. ООП в JavaScript, прототипы. Классы ES6.](https://zemla4ok.github.io/JS-Core/tasks/06.html)

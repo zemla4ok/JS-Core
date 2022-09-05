@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>09</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../css/reveal.css">
+  <link rel="stylesheet" href="../css/theme/yandex.css" id="theme">
+  <link rel="stylesheet" href="../lib/css/zenburn.css">
+  <link rel="stylesheet" href="../css/user.css">
+  <link rel="icon" href="../icons/favicon.png">
+
+  <style>
+    .exec-context-img {
+        width: 600px;
+    }
+  </style>
+</head>
+<body class="yandex nodejs">
+<div class="reveal">
+  <div class="slides">
+
+    <section class="large">
+      <h2>JS Core</h2>
+      <p class="author">
+        <small>Лекция 09</small>
+      </p>
+    </section>
+
+    <section>
+      <h3>ООП, SOLID.</h3>
+      <h3>ООП в JavaScript, прототипы.</h3>
+      <h3>Классы ES6.</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">Объекто-ориентированное программирование</h3>
+      <ul>
+        <li class="left fragment">класс</li>
+        <li class="left fragment">объекты</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">
+        <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods" target="_blank">
+          Принципы ООП
+        </a>
+      </h3>
+      <ul>
+        <li class="left fragment">Наследование</li>
+        <li class="left fragment">Инкапсуляция</li>
+        <li class="left fragment">Полиморфизм</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">SOLID</h3>
+      <ul>
+        <li class="left fragment"><span class="red">S</span>ingle responsibility</li>
+        <li class="left fragment"><span class="red">O</span>pen/close</li>
+        <li class="left fragment"><span class="red">L</span>iskov substitution</li>
+        <li class="left fragment"><span class="red">I</span>nterface segregation</li>
+        <li class="left fragment"><span class="red">D</span>ependency inversion</li>
+        <li class="left fragment">
+          <a href="https://www.youtube.com/watch?v=wi3wPzReKZQ&ab_channel=BadooTech" target="_blank">клац</a>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow"><span class="red">S</span>ingle responsibility</h3>
+      <img class="exec-context-img" src="images/single-responsibility.png">
+    </section>
+
+    <section>
+      <h3 class="yellow"><span class="red">O</span>pen/close</h3>
+      <img class="exec-context-img" src="images/open-closed.png">
+    </section>
+
+    <section>
+      <h3 class="yellow"><span class="red">L</span>iskov substitution</h3>
+      <img class="exec-context-img" src="images/liskov.png">
+    </section>
+
+    <section>
+      <h3 class="yellow"><span class="red">I</span>nterface segregation</h3>
+      <img class="exec-context-img" src="images/interface-segregation.png">
+    </section>
+
+    <section>
+      <h3 class="yellow"><span class="red">D</span>ependency inversion</h3>
+      <img class="exec-context-img" src="images/dependency-inversion.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Прототипы</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+const user = { id: 123 };
+
+const person = {
+  name: 'Dmitry',
+  surname: 'Kotovich',
+  sayHi() {
+    console.log(`Hello, ${this.name} ${this.surname}`);
+  }
+}
+
+user.__proto__ = person;
+
+console.log(user.name); // 'Dmitry'
+user.sayHi(); // Hello, Dmitry Kotovich
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Перебор свойств у объекта</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+const person = { name: 'Dmitry' };
+const user = {
+  id: 123,
+  __proto__: person
+};
+
+for (const prop in user) {
+  console.log(prop); // id name
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Современные способы работы с прототипами</h3>
+      <ul>
+        <li class="left fragment">Object.create(proto, ?props)</li>
+        <li class="left fragment">Object.setPrototypeOf(obj, proto)</li>
+        <li class="left fragment">Object.getPrototypeOf(obj)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">ООП в JS</h3>
+      <ul>
+        <li class="left fragment">ООП в прототипном стиле</li>
+        <li class="left fragment">ООП на классах ES6</li>
+        <li class="left fragment"><s>ООП в функциональном стиле</s></li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Классы в прототипном стиле</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+const uuid = require('uuid');
+
+function Employee(name, surname, position) {
+  this._id = uuid.v4();
+  this._name = name;
+  this._surname = surname;
+  this._position = position;
+}
+Employee.prototype.getFullName = function() {
+  return `${this._name} ${this._surname}`;
+}
+Employee.prototype.startWorking = function() {
+  console.log(`Employee ${this.getFullName()} has started his work`);
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Наследование</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+function Manager(name, surname, position = "MANAGER") {
+  Employee.apply(this, arguments);
+
+  this._permissions = ['Hire', 'Fire']
+}
+Manager.prototype = Object.create(Employee.prototype);
+Manager.prototype.constructor = Manager;
+
+Manager.prototype.hireEmployee = function(employee) {
+  // logic here
+};
+Manager.prototype.fireEmployee = function(employee) {
+  // logic here
+};
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Почему именно подход на прототипах?</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">Классы ES6</h3>
+      <ul>
+        <li class="left fragment">всегда use strict</li>
+        <li class="left fragment">методы неперечисляемы</li>
+        <li class="left fragment">только с new</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Class Expression</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+const User = class {
+  constructor() {
+    // ...
+  }
+}
+
+function createCustomClassWithArgs(args) {
+  return class {
+    constructor() {
+      // ...
+    }
+  }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">get/set</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+            class Employee {
+  #age;
+
+  set age(value) {
+    if (value < 18) throw new Error("Too young!");
+    if (value > 65) throw new Error("Too old!");
+    this.#age = value;
+  }
+
+  get age() {
+    return this.#age;
+  }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">get/set</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+class Employee {}
+class Manager extends Employee {}
+function Person(name) {
+  this.name = name;
+}
+class User extends Person {}
+const Animal = {
+  speak() { console.log(`${this.name} makes some noise!`) }
+}
+class Dog {
+  constructor(name) { this.name = name }
+}
+Object.setPrototypeOf(Dog.prototype, Animal);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">super</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+class Employee {
+  constructor(name) {
+    this.id = uuid.v4();
+    this.name = name;
+  }
+}
+class Manager extends Employee {
+  constructor(props) {
+    console.log(this.name); // 'this' is not allowed before superclass constructor invocation
+    super(props);
+    console.log(this.name); // value of this.name
+  }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">поля(свойства) класса</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+class Employee {
+  #id;
+  #name;
+  static EMPLOYEE_PREFIX = 'employee-';
+
+  constructor(name) {
+    this.#id = uuid.v4();
+    this.#name = name;
+  }
+
+  static compare(epl1, empl2) { /* ... */ }
+  work() { /* ... */ }
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3>Q&A</h3>
+    </section>
+  </div>
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+<script>
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        slideNumber: true,
+        history: true,
+        center: true,
+        hideAddressBar: true,
+        transition: 'slide',
+        dependencies: [
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                condition: function () {
+                    return Boolean(document.querySelector('pre code'));
+                },
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+
+    const body = document.getElementsByClassName('yandex')[0];
+    let invert = false;
+
+    body.onkeypress = function (event) {
+        if (event.key.toLowerCase() !== 'i') return;
+
+        if (invert) body.style = '';
+        else body.style = 'filter: invert(100%)';
+
+        invert = !invert;
+    }
+</script>
+</body>
+</html>
