@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>10</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../css/reveal.css">
+  <link rel="stylesheet" href="../css/theme/yandex.css" id="theme">
+  <link rel="stylesheet" href="../lib/css/zenburn.css">
+  <link rel="stylesheet" href="../css/user.css">
+  <link rel="icon" href="../icons/favicon.png">
+
+  <style>
+  </style>
+</head>
+<body class="yandex nodejs">
+<div class="reveal">
+  <div class="slides">
+
+    <section class="large">
+      <h2>JS Core</h2>
+      <p class="author">
+        <small>Лекция 10</small>
+      </p>
+    </section>
+
+    <section>
+      <h3>Понятие окружения, DOM.</h3>
+      <h3>Навигация по DOM.</h3>
+      <h3>События в браузере.</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">JavaScript и “его” окружения</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">Браузерное окружение</h3>
+      <img src="images/browser-env.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">DOM</h3>
+      <img src="images/DOM.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">BOM</h3>
+      <img src="images/BOM.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">DOM-дерево</h3>
+      <img src="images/dom-ex1.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">DOM-дерево</h3>
+      <img src="images/dom-ex2.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">DOM-навигация</h3>
+      <img src="images/dom-navigation.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Поиск элементов в DOM</h3>
+      <img src="images/search.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">getElementById</h3>
+      <img src="images/getElementById.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">getElementsBy(Class/Tag)Name</h3>
+      <img src="images/getElementsByClassName.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">querySelector(All)</h3>
+      <img src="images/querySelectorAll.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Коллекции</h3>
+      <ul>
+        <li class="left fragment">Живые</li>
+        <li class="left fragment">Неживые</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Еще полезности</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+Element.matches(`a[target="_blank"]`);
+
+Element.closest(`.wrapper`);
+
+elem1.contains(elem2);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Браузерные события</h3>
+      <ul>
+        <li class="left fragment">click/dblclick</li>
+        <li class="left fragment">contextmenu</li>
+        <li class="left fragment">mouseover/mouseout</li>
+        <li class="left fragment">keydown/keyup</li>
+        <li class="left fragment">focus/blur</li>
+        <li class="left fragment">input/change</li>
+        <li class="left fragment">submit</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Стадии (фазы) события</h3>
+      <img src="images/event-life.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Стадия цели</h3>
+      <img src="images/target.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Стадия погружения</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">Обработчики событий</h3>
+      <img src="images/handlers/01.png">
+      <img src="images/handlers/02.png">
+      <img src="images/handlers/03.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Свойства DOM-элементов</h3>
+      <img src="images/properties.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">addEventListener</h3>
+      <img src="images/addEventListener.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">removeEventListener</h3>
+      <img src="images/removeEventListener.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Объект события (event)</h3>
+      <ul>
+        <li class="left fragment">target</li>
+        <li class="left fragment">currentTarget</li>
+        <li class="left fragment">type</li>
+        <li class="left fragment magenta">preventDefault</li>
+        <li class="left fragment magenta">stopPropagation</li>
+        <li class="left fragment magenta">stopImmediatePropagation</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Делегирование событий</h3>
+      <img src="images/event-delegating.png">
+    </section>
+
+
+
+    <section>
+      <h3>Q&A</h3>
+    </section>
+  </div>
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+<script>
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        slideNumber: true,
+        history: true,
+        center: true,
+        hideAddressBar: true,
+        transition: 'slide',
+        dependencies: [
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                condition: function () {
+                    return Boolean(document.querySelector('pre code'));
+                },
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+
+    const body = document.getElementsByClassName('yandex')[0];
+    let invert = false;
+
+    body.onkeypress = function (event) {
+        if (event.key.toLowerCase() !== 'i') return;
+
+        if (invert) body.style = '';
+        else body.style = 'filter: invert(100%)';
+
+        invert = !invert;
+    }
+</script>
+</body>
+</html>
