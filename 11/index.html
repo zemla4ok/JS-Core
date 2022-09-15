@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>11</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../css/reveal.css">
+  <link rel="stylesheet" href="../css/theme/yandex.css" id="theme">
+  <link rel="stylesheet" href="../lib/css/zenburn.css">
+  <link rel="stylesheet" href="../css/user.css">
+  <link rel="icon" href="../icons/favicon.png">
+
+  <style>
+  </style>
+</head>
+<body class="yandex nodejs">
+<div class="reveal">
+  <div class="slides">
+
+    <section class="large">
+      <h2>JS Core</h2>
+      <p class="author">
+        <small>Лекция 11</small>
+      </p>
+    </section>
+
+    <section>
+      <h3>Изменение DOM.</h3>
+      <h3>Атрибуты, классы и стили элементов</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">Манипуляции над DOM</h3>
+      <img src="images/DOM.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Создание узлов</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+const divEl = document.createElement('div');
+
+const listEl = document.createElement('ul');
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Вставка узлов</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+Node.append(param1, /* … ,*/ paramN); // node/string
+Node.preppend(param1, /* … ,*/ paramN); // node/string
+
+Node.before(param1, /* … ,*/ paramN); // node/string
+Node.after(param1, /* … ,*/ paramN); // node/string
+
+Node.replaceWith(param1, /* … ,*/ paramN); // node/string
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Вставка узлов</h3>
+      <div>
+        <pre class="html">
+          <code>
+<h1>Unexpected!</h1>
+          </code>
+        </pre>
+
+        <pre class="javascript">
+          <code>
+Node.textContent; // безопасно
+Element.innerHTML; // небезопасно
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Удаление узлов</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+Node.remove();
+
+Node.removeChild(childNode);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Работа с отображением элементов</h3>
+      <ul>
+        <li class="left fragment magenta">Изменить атрибуты элемента</li>
+        <li class="left fragment green">Изменить набор классов элемента</li>
+        <li class="left fragment red">Изменить стили элемента</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="magenta">Работа с атрибутами элементов</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+Element.hasAttribute(attrName);
+Element.getAttribute(attrName);
+Element.setAttribute(attrName, value);
+Element.removeAttribute(attrName);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="green">Работа с классами элементов</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+Element.classList.add('class');
+Element.classList.remove('class');
+Element.classList.toggle('class');
+Element.classList.contains('class');
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="red">Работа со стилями элементов</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+Element.style.fontSize = '24px';
+Element.style.color = null;
+
+Element.style.cssText = 'prop1: val1; prop2: val2';
+Element.setAttribute('style', 'prop1: val1; prop2: val2');
+
+window.getComputedStyle(element);
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3>Q&A</h3>
+    </section>
+  </div>
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+<script>
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        slideNumber: true,
+        history: true,
+        center: true,
+        hideAddressBar: true,
+        transition: 'slide',
+        dependencies: [
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                condition: function () {
+                    return Boolean(document.querySelector('pre code'));
+                },
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+
+    const body = document.getElementsByClassName('yandex')[0];
+    let invert = false;
+
+    body.onkeypress = function (event) {
+        if (event.key.toLowerCase() !== 'i') return;
+
+        if (invert) body.style = '';
+        else body.style = 'filter: invert(100%)';
+
+        invert = !invert;
+    }
+</script>
+</body>
+</html>
