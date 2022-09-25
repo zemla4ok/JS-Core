@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>12</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../css/reveal.css">
+  <link rel="stylesheet" href="../css/theme/yandex.css" id="theme">
+  <link rel="stylesheet" href="../lib/css/zenburn.css">
+  <link rel="stylesheet" href="../css/user.css">
+  <link rel="icon" href="../icons/favicon.png">
+
+  <style>
+  </style>
+</head>
+<body class="yandex nodejs">
+<div class="reveal">
+  <div class="slides">
+
+    <section class="large">
+      <h2>JS Core</h2>
+      <p class="author">
+        <small>Лекция 12</small>
+      </p>
+    </section>
+
+    <section>
+      <h3><a href="https://habr.com/ru/post/545150/" target="_blank">Регулярные выражения.</a></h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">Для чего?</h3>
+    </section>
+
+    <section>
+      <h3 class="yellow">Классы</h3>
+      <img src="images/classes.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Позиционирование</h3>
+      <img src="images/positioning.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Позиционирование</h3>
+      <img src="images/positioning.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Квантификаторы</h3>
+      <img src="images/quantifications_1.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Квантификаторы</h3>
+      <img src="images/quantificators_2.png">
+    </section>
+
+    <section>
+      <h3 class="yellow">Флаги</h3>
+      <ul>
+        <li class="left fragment">g - глобальный поиск</li>
+        <li class="left fragment">i - регистр не имеет значения</li>
+        <li class="left fragment">m - многострочный поиск</li>
+        <li class="left fragment">s - как одна строка</li>
+        <li class="left fragment">u - unicode</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3 class="yellow">Методы</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+let str = "I love JavaScript";
+
+let result = str.match(/Java(Script)/);
+
+alert( result[0] );     // JavaScript (всё совпадение)
+alert( result[1] );     // Script (первые скобки)
+alert( result.length ); // 2
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Методы</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+let str = 'h1 Hello, world! /h1';
+let regexp = /<(.*?)>/g;
+
+let matchAll = str.matchAll(regexp);
+
+alert(matchAll); // [object RegExp String Iterator], не массив, а перебираемый объект
+
+matchAll = Array.from(matchAll); // теперь массив
+
+let firstMatch = matchAll[0];
+alert( firstMatch[0] );  // h1
+alert( firstMatch[1] );  // h1
+alert( firstMatch.index );  // 0
+alert( firstMatch.input );  // h1 Hello, world! /h1
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Методы</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+console.log('12-34-56'.split('-')) // массив [12, 34, 56]
+console.log('12, 34, 56'.split(/,\s*/)) // массив [12, 34, 56]
+
+let str = "Я люблю JavaScript!";
+let regexp = /Java.+/;
+alert( str.search(regexp) ); // 8
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Методы</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+let str = 'Больше о JavaScript на https://javascript.info';
+let regexp = /javascript/ig;
+
+let result;
+
+while (result = regexp.exec(str)) {
+  alert( `Найдено ${result[0]} на позиции ${result.index}` );
+  // Найдено JavaScript на позиции 9, затем
+  // Найдено javascript на позиции 31
+}
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3 class="yellow">Методы</h3>
+      <div>
+        <pre class="javascript">
+          <code>
+let str = "Я люблю JavaScript";
+
+// эти два теста делают одно и то же
+alert( /люблю/i.test(str) ); // true
+alert( str.search(/люблю/i) != -1 ); // true
+          </code>
+        </pre>
+      </div>
+    </section>
+
+    <section>
+      <h3>Q&A</h3>
+    </section>
+  </div>
+</div>
+
+<script src="../lib/js/head.min.js"></script>
+<script src="../js/reveal.js"></script>
+<script>
+    Reveal.initialize({
+        controls: false,
+        progress: true,
+        slideNumber: true,
+        history: true,
+        center: true,
+        hideAddressBar: true,
+        transition: 'slide',
+        dependencies: [
+            {
+                src: '../plugin/highlight/highlight.js',
+                async: true,
+                condition: function () {
+                    return Boolean(document.querySelector('pre code'));
+                },
+                callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+
+    const body = document.getElementsByClassName('yandex')[0];
+    let invert = false;
+
+    body.onkeypress = function (event) {
+        if (event.key.toLowerCase() !== 'i') return;
+
+        if (invert) body.style = '';
+        else body.style = 'filter: invert(100%)';
+
+        invert = !invert;
+    }
+</script>
+</body>
+</html>

@@ -9,8 +9,10 @@
 [JSC/LECTION/2.4 - Структуры данных.](https://zemla4ok.github.io/JS-Core/06)  
 [JSC/LECTION/3 - Контекст выполнения. Контекст вызова.](https://zemla4ok.github.io/JS-Core/07)  
 [JSC/LECTION/4 - Event Loop. Асинхронность в JavaScript. Promise, HTTP.](https://zemla4ok.github.io/JS-Core/08)  
-[JSC/LECTION/4 - ООП, SOLID. ООП в JavaScript, прототипы. Классы ES6.](https://zemla4ok.github.io/JS-Core/09)  
-[JSC/LECTION/5 - Понятие окружения, DOM. Навигация по DOM. События в браузере.](https://zemla4ok.github.io/JS-Core/10)  
+[JSC/LECTION/5 - ООП, SOLID. ООП в JavaScript, прототипы. Классы ES6.](https://zemla4ok.github.io/JS-Core/09)  
+[JSC/LECTION/6 - Понятие окружения, DOM. Навигация по DOM. События в браузере.](https://zemla4ok.github.io/JS-Core/10)  
+[JSC/LECTION/7 - Изменение DOM. Атрибуты, классы и стили элементов.](https://zemla4ok.github.io/JS-Core/11)  
+[JSC/LECTION/8 - Регулярные выражения.](https://zemla4ok.github.io/JS-Core/12)  
 
 
 #### Задания
