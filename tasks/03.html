@@ -11,7 +11,7 @@
 
 <section class="header">
   <div class="header__content">
-    <div class="header__subject">Оъекты. Сложность алгоритмов (Big O notation). Функции. Структуры данных.</div>
+    <div class="header__subject">Оъекты. Сложность алгоритмов (Big O notation). Функции.</div>
     <div class="header__id">Task03</div>
   </div>
 </section>
@@ -51,6 +51,24 @@
     <span>
       Покажите Pull Request'ы для каждого задания на Github;
     </span>
+  </div>
+</section>
+
+<section class="task">
+  <div class="task__statement">
+    Создать обычный объект и сделать его итерируемым. При этом итерация должна происходить следующим образом:<br/>
+    Должны поочерёдно проходиться все значения от свойства объекта from, до свойства to. (в случае если to < from - должна возникать ошибка).<br/>
+    Если to или from не указаны ИЛИ to или from не являются числами, должна возникать ошибка. Объект должен называться myIterable. Это важно, т.к. проверять буду тестами.<br/>
+    > Примеры:<br/>
+    const myIterable = { from: 1, to: 4 };<br/>
+    for (let item of myIterable) {<br/>
+    console.log(item); // 1, 2, 3, 4<br/>
+    }<br/>
+
+    const myIterable = { from: 'aaa', to: 4 };<br/>
+    for (let item of myIterable) { // Ошибка!<br/>
+    console.log(item);<br/>
+    }<br/>
   </div>
 </section>
 
